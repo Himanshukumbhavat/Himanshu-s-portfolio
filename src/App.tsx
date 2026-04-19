@@ -64,6 +64,12 @@ export default function App() {
     restDelta: 0.001
   });
 
+  const getAssetPath = (path: string) => {
+    if (path.startsWith('http')) return path;
+    const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+    return `${base}${path.startsWith('/') ? path.slice(1) : path}`;
+  };
+
   return (
     <main className="relative overflow-x-hidden bg-bg-dark selection:bg-accent/30">
       <motion.div
@@ -131,13 +137,17 @@ export default function App() {
               className="aspect-[3/4] overflow-hidden rounded-2xl luxury-border relative"
             >
               <img 
-                src="Himanshu-1.jpeg"
+                src={getAssetPath("Himanshu-1.jpeg")}
                 alt="Himanshu Kumbhavat" 
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  if (!target.src.endsWith('.jpg')) {
-                    target.src = 'Himanshu-1.jpg';
+                  if (target.src.endsWith('.jpeg')) {
+                    target.src = getAssetPath('Himanshu-1.jpg');
+                  } else if (target.src.endsWith('.jpg')) {
+                    target.src = getAssetPath('Himanshu.jpeg');
+                  } else if (target.src.endsWith('.jpeg')) {
+                     target.src = getAssetPath('Himanshu.jpg');
                   }
                 }}
               />
@@ -307,7 +317,7 @@ export default function App() {
             >
               <div className="relative aspect-[16/10] rounded-2xl overflow-hidden glass prestige-border mb-12 flex items-center justify-center">
                 <img 
-                  src={project.image} 
+                  src={getAssetPath(project.image)} 
                   alt={project.title} 
                   className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                   referrerPolicy="no-referrer"
@@ -439,7 +449,7 @@ export default function App() {
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
               <a 
-                href="Resume.pdf" 
+                href={getAssetPath("Resume.pdf")} 
                 download="Himanshu_Resume.pdf"
                 className="group px-12 py-6 glass rounded-full prestige-border hover:bg-white hover:text-black transition-all flex items-center gap-6"
               >
