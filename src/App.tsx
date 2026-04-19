@@ -439,8 +439,8 @@ export default function App() {
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-12">
               <a 
-                href="/Resume.pdf" 
-                download
+                href="Resume.pdf" 
+                download="Himanshu_Resume.pdf"
                 className="group px-12 py-6 glass rounded-full prestige-border hover:bg-white hover:text-black transition-all flex items-center gap-6"
               >
                 <div className="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center group-hover:bg-bg-dark transition-colors">
