@@ -136,7 +136,9 @@ export default function App() {
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  //target.src = 'https://picsum.photos/seed/prestige/800/1000';
+                  if (!target.src.endsWith('.jpg')) {
+                    target.src = 'Himanshu-1.jpg';
+                  }
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-transparent to-transparent opacity-40" />
